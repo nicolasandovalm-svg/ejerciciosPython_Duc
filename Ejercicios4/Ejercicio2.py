@@ -1,9 +1,4 @@
 
-
-
-
-
-
 def agregarAlumnos(alumnos):
     nombre = input("Ingrese el nombre del alumno: ").strip()
 
@@ -17,8 +12,13 @@ def agregarAlumnos(alumnos):
     if nombre.isdigit():
         print("El nombre debe ser con letras!")
         return
-        
-    cantidad = int(input("Ingrese cantidad de notas: "))
+    
+    while True:  
+        try:
+            cantidad = int(input("Ingrese cantidad de notas: "))
+            break
+        except ValueError:
+            print("Debe ser un valor vañido y entero, intente nuevamnete")
 
     notas = []
 
@@ -40,16 +40,65 @@ def validaNota():
         except ValueError:
             print("Debe ingresar un valor válido")
 
+def mostrar_alumnos(alumnos):
+    if len(alumnos) == 0:
+        print("No hay alumnos registrados")
+        return
+    for nombre in alumnos:
+        print(nombre, ":",alumnos[nombre])
+
+def ver_promedios(alumnos):
+    if len(alumnos) == 0:
+        print("No hay alumnos registrados")
+        return
+    
+    for nombre in alumnos:
+        promedio = sum(alumnos[nombre])/len(alumnos[nombre])
+        print(f"{nombre} tiene un promedio de: {round(promedio,2)}")
 
 
-alumnos = {}
+def mejor_alumno(alumnos):
+    if len(alumnos) == 0:
+        print("No hay alumnos registrados")
+        return
+    mayor = 0
+    mejorAlumno = ""
+    for nombre in alumnos:
+        promedio = sum(alumnos[nombre])/len(alumnos[nombre])
+
+        if promedio > mayor:
+            mayor = promedio
+            mejorAlumno = nombre
+    print(f"Mejor alumno: {mejorAlumno}, con promedio: {round(mayor,2)}")
+
+aprobados = 0
+
+def cantidad_aprobados(alumnos):
+    if len(alumnos) == 0:
+        print("No hay alumnos registrados")
+        return
+    for nombre in alumnos:
+        promedio = sum(alumnos[nombre])/len(alumnos[nombre])
+
+        if promedio >= 4.0:
+            aprobados = aprobados + 1
+    print(f"la cantidad de aprobados es: {aprobados}")
+
+
+
+
+
+
+#-----SISTEMA PRINCIPAL-------
+
+alumnos = {} #dicc vacío - inicialización del dicc - creo el dicc
 
 while True:
     print("--MENU ALUMNOS")
     print("1. Agregar alumnos")
     print("2. Agregar alumnos")
     print("3. Agregar alumnos")
-    print("4. Agregar alumnos")
+    print("4. Mejr promedio")
     print("5. Cantidad aprobados")
     print("6. Salir")
 
@@ -70,7 +119,19 @@ while True:
         agregarAlumnos(alumnos)
 
     elif op == 2:
-        print(alumnos)
+        mostrar_alumnos(alumnos)
+
+    elif op == 3:
+        ver_promedios(alumnos)
+        
+    elif op == 4:
+        mejor_alumno(alumnos)
+
+    elif op == 5:
+        cantidad_aprobados(alumnos)
     
     elif op == 6:
+        print("Salienod..")
         break
+    else:
+        print("opción no válida")
