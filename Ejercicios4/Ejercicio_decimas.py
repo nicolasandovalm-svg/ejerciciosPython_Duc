@@ -50,6 +50,7 @@ def ingresar_usuario(usuarios):
         #Si tenemos ambas verdaderas terminamos el ciclo
         if tiene_letra == True and tiene_numero == True:
             print("Contraseña Válida!!")
+            usuarios[nombre] = {"sexo": sexo.upper(), "contraseña":contraseña}
             print("Usuario creado con exito")
             break
         #Si No cumple le informamos al usuario
@@ -57,21 +58,30 @@ def ingresar_usuario(usuarios):
             print("Contraseña debe contener al menos un digito numerico y una letra")
             continue
              
-        
+def buscar_usuario(usuarios):
+    '''Esta función busca un usuario por su nombre y muestra sus datos si existe'''
+    print("---BUSCAR USUARIO---")
+    nombre_buscar = input("Ingrese el nombre del usuario a buscar: ").strip()
+    if len(usuarios) == 0:
+        print("No hay usuarios registrados")
+        return
+    
+    if nombre_buscar in usuarios:
+        datos = usuarios[nombre_buscar] 
+        print("¡Usuario encontrado!")
+        print(f"Nombre: {nombre_buscar}")
+        print(f" Sexo: {datos['sexo']}")
+        print(f"Contraseña: {datos['contraseña']}")
+    else:
+        #  Si no existe, le avisamos al usuario
+        print(" El usuario no se encuentra registrado.")
+
 
 
             
         
 
     
-
-
-
-
-
-
-
-
 
 #bucle ppal
 
@@ -93,6 +103,9 @@ while True:
 
     if op == 1:
         ingresar_usuario(usuarios)
+
+    elif op == 2:
+        buscar_usuario(usuarios)
 
     elif op == 4:
         print("SALIENDO...")
