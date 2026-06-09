@@ -5,7 +5,7 @@ def ingresar_usuario(usuarios):
     ''' Esta funcion agrega un usuario, validando nombre, validando sexo y contraseña'''
     #Pedimos nombre de usuario a ingresar y con strip eliminamos espacios.
     print("---INGRESAR USUARIO---")
-    nombre = input("Ingrese el nombre del usuario: ").strip()
+    nombre = input("Ingrese el nombre del usuario: ").strip().upper()
 
     #Validamos que no ingrese un nombre vacio!
     if nombre == "":
@@ -61,7 +61,7 @@ def ingresar_usuario(usuarios):
 def buscar_usuario(usuarios):
     '''Esta función busca un usuario por su nombre y muestra sus datos si existe'''
     print("---BUSCAR USUARIO---")
-    nombre_buscar = input("Ingrese el nombre del usuario a buscar: ").strip()
+    nombre_buscar = input("Ingrese el nombre del usuario a buscar: ").strip().upper()
     if len(usuarios) == 0:
         print("No hay usuarios registrados")
         return
@@ -86,7 +86,7 @@ def eliminar_usuario(usuarios):
         return
 
     # Pedimos el nombre del usuario que se desea borrar
-    nombre_eliminar = input("Ingrese el nombre del usuario a eliminar: ").strip()
+    nombre_eliminar = input("Ingrese el nombre del usuario a eliminar: ").strip().upper()
 
     # Verificamos si el usuario existe en el diccionario
     if nombre_eliminar in usuarios:
