@@ -4,6 +4,7 @@ usuarios = {} #Inicializo el diccionario
 def ingresar_usuario(usuarios): 
     ''' Esta funcion agrega un usuario, validando nombre, validando sexo y contraseña'''
     #Pedimos nombre de usuario a ingresar y con strip eliminamos espacios.
+    print("---INGRESAR USUARIO---")
     nombre = input("Ingrese el nombre del usuario: ").strip()
 
     #Validamos que no ingrese un nombre vacio!
@@ -47,15 +48,14 @@ def ingresar_usuario(usuarios):
                 
             if i.isalpha():
                 tiene_letra = True
-        #Si tenemos ambas verdaderas terminamos el ciclo
+     
         if tiene_letra == True and tiene_numero == True:
             print("Contraseña Válida!!")
             usuarios[nombre] = {"sexo": sexo.upper(), "contraseña":contraseña}
             print("Usuario creado con exito")
             break
-        #Si No cumple le informamos al usuario
         else:
-            print("Contraseña debe contener al menos un digito numerico y una letra")
+            print("Contraseña debe contener al menos un digito numerico y una letra, intentelo nuevamente!")
             continue
              
 def buscar_usuario(usuarios):
@@ -76,12 +76,25 @@ def buscar_usuario(usuarios):
         #  Si no existe, le avisamos al usuario
         print(" El usuario no se encuentra registrado.")
 
-
-
-            
-        
-
+def eliminar_usuario(usuarios):
+    '''Esta función busca un usuario por su nombre y lo elimina junto a sus datos si existe'''
+    print("--- ELIMINAR USUARIO ---")
     
+    # Validamos primero si hay usuarios en el diccionario
+    if len(usuarios) == 0:
+        print("No hay usuarios registrados para eliminar.")
+        return
+
+    # Pedimos el nombre del usuario que se desea borrar
+    nombre_eliminar = input("Ingrese el nombre del usuario a eliminar: ").strip()
+
+    # Verificamos si el usuario existe en el diccionario
+    if nombre_eliminar in usuarios:
+        del usuarios[nombre_eliminar]#eliminamos la clave y el valor
+        print("Usuario eliminado con exito!")
+    else:
+        print("No se pudo eliminar usuario!")
+
 
 #bucle ppal
 
@@ -106,6 +119,9 @@ while True:
 
     elif op == 2:
         buscar_usuario(usuarios)
+    
+    elif op == 3:
+        eliminar_usuario(usuarios)
 
     elif op == 4:
         print("SALIENDO...")
